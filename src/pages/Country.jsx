@@ -21,7 +21,6 @@ export const Country = () => {
     oneCountie();
   }, [countryId]);
 
-  console.log(countrie);
   return (
     <Section>
       <Container>

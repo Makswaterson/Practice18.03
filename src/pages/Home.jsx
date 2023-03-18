@@ -8,12 +8,15 @@ export const Home = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const allCounties = async () => {
       try {
         const data = await getCountries();
         setCounties(data);
       } catch (error) {
         setError(error);
+      } finally {
+        setLoading(false);
       }
     };
     allCounties();
@@ -24,6 +27,8 @@ export const Home = () => {
       <Container>
         <CountryList countries={countries} />
       </Container>
+      {loading && <Loader />}
+      {error && <Heading>Sorry,one more time!</Heading>}
     </Section>
   );
 };

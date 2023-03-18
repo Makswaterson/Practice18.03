@@ -1,3 +1,4 @@
+import { Link, useLocation } from 'react-router-dom';
 import {
   CountryWrapper,
   CountryDescription,
@@ -12,10 +13,11 @@ import {
 export const CountryInfo = ({
   countrie: { flag, capital, country, id, languages = [], population },
 }) => {
-  console.log(capital);
+  const location = useLocation();
+  const backToCountry = location.state?.from?.pathname ?? '/';
+
   return (
     <CountryWrapper key={id}>
-      <button type="button">Back</button>
       <Flag>
         <Image src={flag} alt={country} />
       </Flag>
@@ -34,6 +36,14 @@ export const CountryInfo = ({
           Languages: <Accent>{languages.join(', ')}</Accent>
         </CountryDetail>
       </CountryDescription>
+      <Link to={backToCountry}>
+        {''}
+        <button type="button">back to country</button>
+      </Link>
+      <Link to="/country/">
+        {' '}
+        <button type="button">back to region</button>
+      </Link>
     </CountryWrapper>
   );
 };
