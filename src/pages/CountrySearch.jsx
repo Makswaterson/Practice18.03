@@ -8,7 +8,7 @@ import {
 } from 'components';
 import { fetchByRegion } from '../service/country-service';
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
 export const CountrySearch = () => {
   const [error, setError] = useState(null);
@@ -16,6 +16,7 @@ export const CountrySearch = () => {
   const [countries, setCountries] = useState([]);
   const [region, setRegion] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
 
   const formSubmit = value => {
     setRegion(value);
@@ -24,9 +25,9 @@ export const CountrySearch = () => {
   // залишати значеня країни при переході назад зі сторінки окремої країни
 
   useEffect(() => {
-    // if (region === '') {
-    //   return;
-    // }
+    if (region === '') {
+      return;
+    }
     const params = searchParams.get('query');
     console.log(params);
     setLoading(true);
@@ -41,7 +42,7 @@ export const CountrySearch = () => {
       }
     };
     allRegions();
-  }, [searchParams]);
+  }, [region, searchParams]);
 
   return (
     <Section>

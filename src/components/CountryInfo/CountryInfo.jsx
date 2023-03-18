@@ -14,6 +14,7 @@ export const CountryInfo = ({
   countrie: { flag, capital, country, id, languages = [], population },
 }) => {
   const location = useLocation();
+
   const backToCountry = location.state?.from?.pathname ?? '/';
 
   return (
@@ -40,6 +41,10 @@ export const CountryInfo = ({
         {''}
         <button type="button">back to country</button>
       </Link>
+      {/* <Link to="/country/">
+        {' '}
+        <button type="button">back to region</button>
+      </Link> */}
       <Link to="/country/">
         {' '}
         <button type="button">back to region</button>
